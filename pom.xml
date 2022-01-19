@@ -14,7 +14,7 @@
 	<name>grade-tracker-api</name>
 	<description>RESTful API for the Grade Tracker app.</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,6 +54,12 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>3.0.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,6 +67,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.6.2</version>
 				<configuration>
 					<excludes>
 						<exclude>
