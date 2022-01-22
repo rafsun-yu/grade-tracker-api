@@ -1,6 +1,8 @@
 package com.r5n.gradetrackerapi.model;
 
 import lombok.Data;
+
+import java.util.List;
 import java.util.UUID;
 import com.fasterxml.jackson.annotation.*;
 import javax.persistence.*;
@@ -36,6 +38,10 @@ public class Class {
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
     private User enrolledUser;
+
+    @OneToMany(mappedBy = "belongingClass")
+    @JsonProperty("activities")
+    private List<Activity> activityList;
 
     public Class() {
     }

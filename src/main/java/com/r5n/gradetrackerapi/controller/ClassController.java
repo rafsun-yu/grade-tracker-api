@@ -1,5 +1,6 @@
 package com.r5n.gradetrackerapi.controller;
 
+import com.r5n.gradetrackerapi.model.Activity;
 import com.r5n.gradetrackerapi.model.Class;
 import com.r5n.gradetrackerapi.model.User;
 import com.r5n.gradetrackerapi.repository.*;
@@ -10,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.AccessDeniedException;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +40,12 @@ public class ClassController {
     public ResponseEntity<?> getClasses() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Class> classes = classRepository.findByEnrolledUserId(user.getId());
+
+        // Sorts activities by proper order.
+        for (Class c: classes) {
+            c.getActivityList().sort(Comparator.comparing(Activity::getOrder));
+        }
+
         return ResponseEntity.ok().body(classes);
     }
 
