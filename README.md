@@ -51,3 +51,65 @@ Response:
 Response:
 <br> 204 (success)
 <br> 403 (if the class doesn't belong to the user)
+
+## Activities
+All endpoints requires user authorization.
+
+### `POST /api/classes/{id}/activities`
+Adds an activity in the provided class.
+<br><br>
+Request body (JSON):
+<table>
+    <tr>
+        <td>name (String)</td>    
+        <td>Name of the activity. For example, quiz, test, assignment etc.</td>    
+    </tr>
+    <tr>
+        <td>weight (Double)</td>    
+        <td>Weight of the activity in the final grade in percentage.</td>    
+    </tr>
+    <tr>
+        <td>total (Double) (Optional)</td>    
+        <td>
+            Total score on which the activity is graded on. For example,
+            weight may be 5% but the total score can be 100.
+            <br>
+            Can be excluded if unknown.
+        </td>    
+    </tr>
+    <tr>
+        <td>score (Double) (Optional)</td>    
+        <td>
+            Score achieved by the user.
+            <br>
+            Can be excluded to indicate that the activity has not been graded yet.
+        </td>    
+    </tr>
+</table>
+
+Response:
+<br> 201 (success; returns the newly created activity)
+<br> 401 (unauthorized)
+<br>
+
+### `POST /api/classes/{id}/activities/ordering`
+Changes the order of activities. 
+
+Request body: Ordered JSON array of activity ids. If one or more activity 
+ids are not provided but they are in the class, then they are put at the end
+of newly ordered activities.
+
+Response:
+<br> 200 (success; returns activity list)
+
+### `PATCH /api/activities/{id}`
+Updates the provided activity. Usually used for updating the 'score' attribute.
+<br><br>
+Request body (JSON): Same as the post endpoint, but all keys are optional.
+<br><br>
+Response:
+200 (succeed; returns the updated activity)
+
+### `DELETE /api/activities/{id}`
+Response:
+<br> 204 (success)
