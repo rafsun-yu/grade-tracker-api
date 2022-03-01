@@ -45,4 +45,19 @@ public class Activity {
         this.weight = weight;
         this.total = total;
     }
+
+    /**
+     * Returns the weight scored.
+     */
+    public Double getWeightAchieved() {
+        return this.score / this.total * this.weight;
+    }
+
+    /**
+     * Returns whether the activity is graded.
+     * @return
+     */
+    public boolean isGraded() {
+        return this.score != null;
+    }
 }
